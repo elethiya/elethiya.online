@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELETHIYA hub — Domain Migration Notice</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+html{scroll-behavior:smooth; height:100%;}
+
+body{
+  margin:0; padding:0; min-height:100%;
+  font-family:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  color:#f2f4fa;
+  background:#000;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(76,243,255,0.25);
+  border-radius: 10px;
+  border: 2px solid #000;
+  transition: background 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(76,243,255,0.5);
+}
+
+/* ── GRAPH PAPER BACKGROUND ── */
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-color:#000;
+  background-image:
+    linear-gradient(rgba(76,243,255,0.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,243,255,0.08) 1px,transparent 1px),
+    linear-gradient(rgba(76,243,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,243,255,0.03) 1px,transparent 1px);
+  background-size:100px 100px,100px 100px,20px 20px,20px 20px;
+}
+
+/* ── NEON GLOW BLOBS ── */
+.glow-a,.glow-b{
+  position:fixed;border-radius:50%;filter:blur(120px);
+  pointer-events:none;z-index:0;
+}
+.glow-a{
+  width:600px;height:600px;top:-200px;left:-180px;
+  background:radial-gradient(circle,rgba(76,243,255,0.45),transparent 70%);
+  animation:drift 22s ease-in-out infinite;
+}
+.glow-b{
+  width:520px;height:520px;bottom:-220px;right:-150px;
+  background:radial-gradient(circle,rgba(255,95,209,0.30),transparent 70%);
+  animation:drift 22s ease-in-out infinite reverse;
+  animation-delay:-9s;
+}
+@keyframes drift{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(28px,22px)}
+}
+
+/* ── PAGE WRAPPER ── */
+.page{position:relative;z-index:2;display:flex;flex-direction:column;min-height:100vh;}
+main{flex:1;}
+
+/* ── LAYOUT ── */
+.wrap{
+  position:relative;z-index:1;
+  max-width:1120px;margin:0 auto;padding:0 24px;
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid #4cf3ff;outline-offset:2px}
+
+/* ── NOTICE HEADER (sticky blurred glass) ── */
+.notice-bar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(6,6,10,0.45);
+  border-bottom:1px solid rgba(76,243,255,0.25);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:0 8px 40px -16px rgba(76,243,255,0.3);
+}
+.notice-inner{
+  display:flex;align-items:center;justify-content:center;gap:14px;padding:12px 24px;
+  max-width:1120px;margin:0 auto;
+}
+.notice-tag{
+  flex-shrink:0;
+  font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  color:#4cf3ff;
+  background:rgba(76,243,255,0.1);
+  border:1px solid rgba(76,243,255,0.45);
+  padding:4px 12px;border-radius:999px;
+  box-shadow:0 0 16px rgba(76,243,255,0.35);
+  text-shadow:0 0 8px rgba(76,243,255,0.6);
+}
+.notice-text{margin:0;font-size:13.5px;color:#9ca1af;line-height:1.55}
+.notice-text strong{color:#f2f4fa;font-weight:600}
+.notice-link{
+  color:#4cf3ff;text-decoration:underline;
+  text-underline-offset:2px;font-weight:600;
+  text-shadow:0 0 8px rgba(76,243,255,0.4);
+}
+.notice-link:hover{color:#a6f7ff}
+
+/* ── HERO ── */
+.hero{padding:48px 0 64px;position:relative;z-index:1;border-bottom:1px solid rgba(255,255,255,0.08)}
+.hero-inner{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
+}
+.eyebrow{
+  font-family:'Space Mono',monospace;font-size:13px;
+  color:#4cf3ff;margin:0 0 18px;opacity:0.7;
+  text-shadow:0 0 10px rgba(76,243,255,0.3);
+}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;line-height:1.05;
+  margin:0;
+  color:#4cf3ff;
+  text-shadow:0 0 20px rgba(76,243,255,0.5),0 0 50px rgba(76,243,255,0.2);
+}
+.hero h1 .accent{
+  color:#fff;
+  background:#e63946;
+  padding:1px 12px 4px;
+  border-radius:8px;
+  margin-left:4px;
+  text-shadow:none;
+  box-shadow:0 0 20px rgba(230,57,70,0.6),0 0 4px rgba(230,57,70,0.8);
+  font-size:0.5em;
+  vertical-align:middle;
+  position:relative;
+  top:-4px;
+}
+.hero-desc{margin:22px 0 32px;max-width:50ch;color:#9ca1af;font-size:16.5px;line-height:1.7}
+.hero-desc strong{color:#f2f4fa}
+.inline-link{
+  color:#4cf3ff;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:rgba(76,243,255,0.4);
+  text-shadow:0 0 8px rgba(76,243,255,0.3);
+  transition:text-decoration-color .15s;
+}
+.inline-link:hover{text-decoration-color:#4cf3ff}
+.inline-link--cyan{
+  color:#4cf3ff; 
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:6px;font-size:14.5px;font-weight:600;
+  font-family:'Outfit',sans-serif;border:1px solid transparent;cursor:pointer;
+  transition:transform .15s,background .15s,border-color .15s,box-shadow .15s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{
+  background:#4cf3ff;color:#041a1c;
+  box-shadow:0 0 24px rgba(76,243,255,0.5),0 0 4px rgba(76,243,255,0.7);
+}
+.btn-primary:hover{
+  background:#7ef7ff;
+  box-shadow:0 0 36px rgba(76,243,255,0.7),0 0 6px rgba(76,243,255,0.9);
+}
+.btn-ghost{
+  background:rgba(14,16,22,0.4);color:#f2f4fa;
+  border-color:rgba(255,255,255,0.14);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.btn-ghost:hover{
+  border-color:#4cf3ff;
+  box-shadow:0 0 20px rgba(76,243,255,0.2);
+}
+
+/* ── HERO PANEL (glass terminal) ── */
+.hero-panel{
+  background:rgba(10,12,18,0.4);
+  border:1px solid rgba(76,243,255,0.25);
+  border-radius:16px;overflow:hidden;
+  backdrop-filter:blur(22px) saturate(140%);
+  -webkit-backdrop-filter:blur(22px) saturate(140%);
+  box-shadow:
+    0 24px 70px -24px rgba(0,0,0,0.7),
+    0 0 40px -8px rgba(76,243,255,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.panel-head{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.02);
+}
+.panel-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#4cf3ff;
+  box-shadow:0 0 12px rgba(76,243,255,0.9);
+}
+.panel-title{font-family:'Space Mono',monospace;font-size:12px;color:#5a5f6d}
+.panel-body{padding:18px 16px;display:flex;flex-direction:column;gap:10px}
+
+.row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 14px;border-radius:6px;
+  border:1px solid rgba(255,255,255,0.1);
+  font-family:'Space Mono',monospace;font-size:13.5px;
+  transition:transform .15s,border-color .15s,background .15s,box-shadow .15s;
+}
+.row-domain{color:#f2f4fa}
+.row-state{
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+  font-weight:700;padding:3px 8px;border-radius:4px;
+}
+.row-warn{background:rgba(255,255,255,0.03)}
+.row-warn .row-state{color:#5a5f6d;background:rgba(255,255,255,0.06)}
+.row-warn .row-domain{color:#9ca1af;text-decoration:line-through;text-decoration-color:#5a5f6d}
+
+.row-ok{background:rgba(92,255,176,0.06);border-color:rgba(92,255,176,0.18);cursor:pointer}
+.row-ok .row-state{
+  color:#5cffb0;background:rgba(92,255,176,0.16);
+  text-shadow:0 0 8px rgba(92,255,176,0.5);
+}
+.row-ok:hover{
+  transform:translateX(3px);
+  border-color:rgba(92,255,176,0.55);
+  background:rgba(92,255,176,0.1);
+  box-shadow:0 0 22px -4px rgba(92,255,176,0.4);
+}
+
+.row-redirect{background:rgba(76,243,255,0.06);border-color:rgba(76,243,255,0.18);cursor:pointer}
+.row-redirect .row-state{
+  color:#4cf3ff;background:rgba(76,243,255,0.16);
+  text-shadow:0 0 8px rgba(76,243,255,0.5);
+}
+.row-redirect:hover{
+  transform:translateX(3px);
+  border-color:rgba(76,243,255,0.55);
+  background:rgba(76,243,255,0.1);
+  box-shadow:0 0 22px -4px rgba(76,243,255,0.4);
+}
+
+.panel-foot{
+  padding:10px 16px 16px;
+  font-family:'Space Mono',monospace;font-size:12px;color:#5a5f6d;
+  min-height:20px;
+}
+.typed-cursor::after{content:"▍";animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ── SECTIONS ── */
+.section{padding:72px 0;position:relative;z-index:1;border-bottom:1px solid rgba(255,255,255,0.08)}
+.section-eyebrow{
+  font-family:'Space Grotesk',sans-serif;font-size:12.5px;
+  color:#4cf3ff;margin:0 0 12px;letter-spacing:.04em;
+  text-shadow:0 0 10px rgba(76,243,255,0.45);
+}
+.section-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.7rem,3.2vw,2.3rem);margin:0 0 16px;
+  color:#4cf3ff;
+  text-shadow:0 0 16px rgba(76,243,255,0.4);
+}
+
+/* ── STATUS CARDS (glass) ── */
+.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.status-card{
+  display:block;
+  background:rgba(10,12,18,0.42);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;padding:26px;
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
+  transition:transform .18s,border-color .18s,background .18s,box-shadow .18s;
+}
+a.status-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 40px -16px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.status-card--sunset{border-color:rgba(255,255,255,0.08)}
+.status-card--live{border-color:rgba(92,255,176,0.16)}
+.status-card--live:hover{
+  border-color:rgba(92,255,176,0.5);
+  box-shadow:0 14px 40px -16px rgba(92,255,176,0.35),inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.status-card--redirect{border-color:rgba(76,243,255,0.16)}
+.status-card--redirect:hover{
+  border-color:rgba(76,243,255,0.5);
+  box-shadow:0 14px 40px -16px rgba(76,243,255,0.35),inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.status-card-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.status-card-top h3{
+  font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;margin:0;
+  color:#f2f4fa;
+}
+.status-card--live .status-card-top h3{color:#5cffb0;text-shadow:0 0 14px rgba(92,255,176,0.5);}
+.status-card--redirect .status-card-top h3{color:#4cf3ff;text-shadow:0 0 14px rgba(76,243,255,0.5);}
+
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-warn{background:#5a5f6d}
+.dot-ok{background:#5cffb0;box-shadow:0 0 12px rgba(92,255,176,0.8)}
+.dot-redirect{background:#4cf3ff;box-shadow:0 0 12px rgba(76,243,255,0.8)}
+
+.status-label{
+  font-family:'Space Grotesk',sans-serif;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:.05em;margin:0 0 14px;
+}
+.status-card--sunset .status-label{color:#5a5f6d}
+.status-card--live .status-label{color:#5cffb0;text-shadow:0 0 8px rgba(92,255,176,0.4);}
+.status-card--redirect .status-label{color:#4cf3ff;text-shadow:0 0 8px rgba(76,243,255,0.4);}
+
+.status-copy{color:#9ca1af;font-size:14.5px;margin:0}
+
+/* ── FAQ (glass) ── */
+.faq-list{display:flex;flex-direction:column;gap:10px;max-width:760px}
+.faq-item{
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:4px 20px;
+  background:rgba(10,12,18,0.42);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  transition:border-color .18s,box-shadow .18s;
+}
+.faq-item summary{
+  cursor:pointer;padding:16px 0;
+  font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;
+  list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{
+  content:"+";color:#ff5fd1;font-size:18px;margin-left:12px;
+  text-shadow:0 0 12px rgba(255,95,209,0.5);
+}
+.faq-item[open]{
+  border-color:rgba(255,95,209,0.3);
+  box-shadow:0 0 30px -14px rgba(255,95,209,0.4);
+}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{color:#9ca1af;font-size:14.5px;margin:0 0 18px;max-width:62ch}
+
+/* ── FOOTER ── */
+.site-footer{
+  position:relative;z-index:2;
+  padding:24px 20px;
+  text-align:center;
+  background:rgba(6,6,10,0.5); /* Semi-transparent base */
+  backdrop-filter:blur(14px); /* Blur effect */
+  -webkit-backdrop-filter:blur(14px);
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.footer-inner{
+  display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+}
+.footer-copy{
+  margin:0;font-family:'Space Grotesk',sans-serif;font-size:13px;color:#9ca1af;
+}
+.footer-dev{
+  margin:0;font-family:'Space Grotesk',sans-serif;font-size:12px;color:#5a5f6d;
+}
+.footer-brand-neon{
+  color:#ff5fd1;font-weight:700;
+  text-shadow:0 0 14px rgba(255,95,209,0.6),0 0 40px rgba(255,95,209,0.2);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .status-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .hero{padding:32px 0 48px}
+  .section{padding:56px 0}
+  .notice-inner{
+    flex-wrap:wrap;justify-content:flex-start;gap:10px;padding:12px 20px;
+  }
+  .notice-tag{order:1}
+  .notice-text{order:2;flex-basis:100%;font-size:13px;line-height:1.6}
+  .footer-inner{flex-direction:column;align-items:center}
+}
+@media(max-width:420px){
+  .wrap{padding:0 16px}
+  .notice-inner{padding:10px 16px;gap:8px}
+  .notice-tag{font-size:10px;padding:3px 10px}
+  .notice-text{font-size:12.5px}
+  .hero-desc{font-size:15px}
+  .btn{width:100%;justify-content:center}
+  .hero-actions{flex-direction:column}
+  .hero h1{font-size:2rem}
+  .hero h1 .accent{font-size:0.45em;padding:1px 10px 3px}
+}
+</style>
+</head>
+<body>
+
+<!-- Background layers -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="glow-a" aria-hidden="true"></div>
+<div class="glow-b" aria-hidden="true"></div>
+
+<!-- PAGE WRAPPER -->
+<div class="page">
+  <!-- NOTICE HEADER -->
+  <div class="notice-bar" id="noticeBar">
+    <div class="notice-inner">
+      <span class="notice-tag">notice</span>
+      <p class="notice-text">
+        <strong>elethiya.online</strong> is no longer maintained and will be permanently closed in the coming months.
+        Please use our primary domain 
+        <a href="https://elethiya.com" target="_blank" rel="noopener" class="notice-link">elethiya.com</a>.
+      </p>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">// we will not be available on this domain after a few months</p>
+          <h1>ELETHIYA <span class="accent">hub</span></h1>
+          <p class="hero-desc">
+            <strong>elethiya.online</strong> is being retired and will permanently close
+            in the coming months. We've consolidated our platform —
+            <a href="https://elethiya.com" target="_blank" rel="noopener" class="inline-link">elethiya.com</a>
+            is now the primary address, while
+            <a href="https://elethiya.in" target="_blank" rel="noopener" class="inline-link inline-link--cyan">elethiya.in</a>
+            now serves as ELETHIYA's official portfolio website. Please update your bookmarks.
+          </p>
+          <div class="hero-actions">
+            <a href="https://elethiya.com" target="_blank" rel="noopener" class="btn btn-primary">Visit elethiya.com</a>
+            <a href="https://elethiya.in" target="_blank" rel="noopener" class="btn btn-primary">Go to elethiya.in</a>
+            <a href="#status" class="btn btn-ghost">Learn more below</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-head">
+            <span class="panel-dot"></span>
+            <span class="panel-title">domain_registry.log</span>
+          </div>
+          <div class="panel-body">
+            <div class="row row-warn">
+              <span class="row-domain">elethiya.online</span>
+              <span class="row-state">retiring</span>
+            </div>
+            <a class="row row-ok" href="https://elethiya.com" target="_blank" rel="noopener">
+              <span class="row-domain">elethiya.com</span>
+              <span class="row-state">PRIMARY</span>
+            </a>
+            <a class="row row-redirect" href="https://elethiya.in" target="_blank" rel="noopener">
+              <span class="row-domain">elethiya.in</span>
+              <span class="row-state">portfolio</span>
+            </a>
+          </div>
+          <div class="panel-foot">
+            <span class="typed-cursor" id="typedLine"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATUS -->
+    <section class="section" id="status">
+      <div class="wrap">
+        <p class="section-eyebrow">01 — migration</p>
+        <h2 class="section-title">Where things stand</h2>
+
+        <div class="status-grid">
+          <article class="status-card status-card--sunset">
+            <div class="status-card-top">
+              <span class="dot dot-warn"></span>
+              <h3>elethiya.online</h3>
+            </div>
+            <p class="status-label">Sunsetting</p>
+            <p class="status-copy">
+              This domain is no longer in active use and will be permanently shut down
+              within the next few months. Anything still pointed at it should be moved now.
+            </p>
+          </article>
+
+          <a class="status-card status-card--live" href="https://elethiya.com" target="_blank" rel="noopener">
+            <div class="status-card-top">
+              <span class="dot dot-ok"></span>
+              <h3>elethiya.com</h3>
+            </div>
+            <p class="status-label">PRIMARY</p>
+            <p class="status-copy">
+              The main domain going forward. Use this for everything that used to live
+              on the .online address.
+            </p>
+          </a>
+
+          <a class="status-card status-card--redirect" href="https://elethiya.in" target="_blank" rel="noopener">
+            <div class="status-card-top">
+              <span class="dot dot-redirect"></span>
+              <h3>elethiya.in</h3>
+            </div>
+            <p class="status-label">Portfolio Website</p>
+            <p class="status-copy">
+              The dedicated home for ELETHIYA's portfolio. Visit this domain to explore our latest creative work and project showcases.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap">
+        <p class="section-eyebrow">02 — questions</p>
+        <h2 class="section-title">Before you ask</h2>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Why is elethiya.online shutting down?</summary>
+            <p>It's no longer in active use, and keeping an idle domain registered and pointed at live infrastructure isn't worth the upkeep. It will be permanently closed after a short wind-down period.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do I need to change anything?</summary>
+            <p>If you have links, bookmarks, or integrations pointing at the .online domain, update them directly to elethiya.com. If you are looking for our portfolio, please visit elethiya.in.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Will content move automatically?</summary>
+            <p>Core content is mirrored across the new domains already. Anything you've linked directly should still be re-pointed manually, since the old domain won't resolve once it's decommissioned.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What is elethiya.in used for now?</summary>
+            <p>elethiya.in has been transitioned into ELETHIYA's official portfolio website. It now acts as the central hub for showcasing all of our creative work and projects.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-copy">&copy; 2026 <span class="footer-brand-neon">ELETHIYA</span> | All rights reserved</p>
+      <p class="footer-dev">Developed &amp; Powered By - <span class="footer-brand-neon">ELETHIYA</span></p>
+    </div>
+  </footer>
+</div>
+
+<script>
+// Typed status line
+var typedLine = document.getElementById('typedLine');
+if (typedLine && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  var messages = [
+    'resolving elethiya.com ... ok',
+    'loading elethiya.in ... portfolio active',
+    'elethiya.online scheduled for teardown'
+  ];
+  var msgIndex = 0, charIndex = 0, deleting = false;
+  function tick() {
+    var current = messages[msgIndex];
+    if (!deleting) {
+      charIndex++;
+      typedLine.textContent = current.slice(0, charIndex);
+      if (charIndex === current.length) { deleting = true; setTimeout(tick, 1400); return; }
+    } else {
+      charIndex--;
+      typedLine.textContent = current.slice(0, charIndex);
+      if (charIndex === 0) { deleting = false; msgIndex = (msgIndex + 1) % messages.length; }
+    }
+    setTimeout(tick, deleting ? 25 : 40);
+  }
+  tick();
+} else if (typedLine) {
+  typedLine.textContent = 'resolving elethiya.com ... ok';
+}
+</script>
+</body>
+</html>
